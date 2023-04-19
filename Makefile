@@ -1,5 +1,5 @@
 PKG_NAME := pypi-yapf
-URL = https://files.pythonhosted.org/packages/c2/cd/d0d1e95b8d78b8097d90ca97af92f4af7fb2e867262a2b6e37d6f48e612a/yapf-0.32.0.tar.gz
+URL = https://files.pythonhosted.org/packages/83/6e/72395cbbd59eedc48913f8694d445acbdba699c50312001b702c5ff46001/yapf-0.33.0.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
