@@ -4,10 +4,10 @@
 # Using build pattern: distutils3
 #
 Name     : pypi-yapf
-Version  : 0.33.0
-Release  : 14
-URL      : https://files.pythonhosted.org/packages/83/6e/72395cbbd59eedc48913f8694d445acbdba699c50312001b702c5ff46001/yapf-0.33.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/83/6e/72395cbbd59eedc48913f8694d445acbdba699c50312001b702c5ff46001/yapf-0.33.0.tar.gz
+Version  : 0.40.0
+Release  : 15
+URL      : https://files.pythonhosted.org/packages/7a/cb/7675e1d2788ce93246f8c2e0e6ed00019c86853f92dc9226a90e0e1a1e95/yapf-0.40.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/7a/cb/7675e1d2788ce93246f8c2e0e6ed00019c86853f92dc9226a90e0e1a1e95/yapf-0.40.0.tar.gz
 Summary  : A formatter for Python code.
 Group    : Development/Tools
 License  : Apache-2.0
@@ -16,6 +16,8 @@ Requires: pypi-yapf-license = %{version}-%{release}
 Requires: pypi-yapf-python = %{version}-%{release}
 Requires: pypi-yapf-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
+BuildRequires : pypi(importlib_metadata)
+BuildRequires : pypi(platformdirs)
 BuildRequires : pypi(py)
 BuildRequires : pypi(tomli)
 BuildRequires : pypi-pluggy
@@ -27,12 +29,8 @@ BuildRequires : pypi-virtualenv
 %define debug_package %{nil}
 
 %description
-====
 YAPF
-====
-.. image:: https://badge.fury.io/py/yapf.svg
-:target: https://badge.fury.io/py/yapf
-:alt: PyPI version
+        ====
 
 %package bin
 Summary: bin components for the pypi-yapf package.
@@ -65,6 +63,8 @@ Summary: python3 components for the pypi-yapf package.
 Group: Default
 Requires: python3-core
 Provides: pypi(yapf)
+Requires: pypi(importlib_metadata)
+Requires: pypi(platformdirs)
 Requires: pypi(tomli)
 
 %description python3
@@ -72,10 +72,10 @@ python3 components for the pypi-yapf package.
 
 
 %prep
-%setup -q -n yapf-0.33.0
-cd %{_builddir}/yapf-0.33.0
+%setup -q -n yapf-0.40.0
+cd %{_builddir}/yapf-0.40.0
 pushd ..
-cp -a yapf-0.33.0 buildavx2
+cp -a yapf-0.40.0 buildavx2
 popd
 
 %build
@@ -83,15 +83,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1681920188
+export SOURCE_DATE_EPOCH=1686670345
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
