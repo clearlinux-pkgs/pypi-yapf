@@ -4,13 +4,13 @@
 # Using build pattern: distutils3
 #
 Name     : pypi-yapf
-Version  : 0.40.0
-Release  : 15
-URL      : https://files.pythonhosted.org/packages/7a/cb/7675e1d2788ce93246f8c2e0e6ed00019c86853f92dc9226a90e0e1a1e95/yapf-0.40.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/7a/cb/7675e1d2788ce93246f8c2e0e6ed00019c86853f92dc9226a90e0e1a1e95/yapf-0.40.0.tar.gz
+Version  : 0.40.1
+Release  : 16
+URL      : https://files.pythonhosted.org/packages/e0/7a/9020bfa17d294b5d0d8bf26bb175ad4c90d1e3ad4039001f621ef046cb06/yapf-0.40.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/e0/7a/9020bfa17d294b5d0d8bf26bb175ad4c90d1e3ad4039001f621ef046cb06/yapf-0.40.1.tar.gz
 Summary  : A formatter for Python code.
 Group    : Development/Tools
-License  : Apache-2.0
+License  : Apache-2.0 Python-2.0
 Requires: pypi-yapf-bin = %{version}-%{release}
 Requires: pypi-yapf-license = %{version}-%{release}
 Requires: pypi-yapf-python = %{version}-%{release}
@@ -29,8 +29,12 @@ BuildRequires : pypi-virtualenv
 %define debug_package %{nil}
 
 %description
+====
 YAPF
-        ====
+====
+.. image:: https://badge.fury.io/py/yapf.svg
+:target: https://badge.fury.io/py/yapf
+:alt: PyPI version
 
 %package bin
 Summary: bin components for the pypi-yapf package.
@@ -72,10 +76,10 @@ python3 components for the pypi-yapf package.
 
 
 %prep
-%setup -q -n yapf-0.40.0
-cd %{_builddir}/yapf-0.40.0
+%setup -q -n yapf-0.40.1
+cd %{_builddir}/yapf-0.40.1
 pushd ..
-cp -a yapf-0.40.0 buildavx2
+cp -a yapf-0.40.1 buildavx2
 popd
 
 %build
@@ -83,7 +87,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1686670345
+export SOURCE_DATE_EPOCH=1687275417
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -109,6 +113,8 @@ export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-yapf
 cp %{_builddir}/yapf-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-yapf/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
+cp %{_builddir}/yapf-%{version}/third_party/yapf_third_party/_ylib2to3/LICENSE %{buildroot}/usr/share/package-licenses/pypi-yapf/8482348f12824b36fba59883f9dd7fe03c1f86ca || :
+cp %{_builddir}/yapf-%{version}/third_party/yapf_third_party/yapf_diff/LICENSE %{buildroot}/usr/share/package-licenses/pypi-yapf/76cdb6c64722fbcd432e868ee1498e304e967204 || :
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -134,6 +140,8 @@ popd
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/pypi-yapf/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+/usr/share/package-licenses/pypi-yapf/76cdb6c64722fbcd432e868ee1498e304e967204
+/usr/share/package-licenses/pypi-yapf/8482348f12824b36fba59883f9dd7fe03c1f86ca
 
 %files python
 %defattr(-,root,root,-)
