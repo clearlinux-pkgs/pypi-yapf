@@ -5,7 +5,7 @@
 #
 Name     : pypi-yapf
 Version  : 0.40.2
-Release  : 19
+Release  : 20
 URL      : https://files.pythonhosted.org/packages/b9/14/c1f0ebd083fddd38a7c832d5ffde343150bd465689d12c549c303fbcd0f5/yapf-0.40.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/b9/14/c1f0ebd083fddd38a7c832d5ffde343150bd465689d12c549c303fbcd0f5/yapf-0.40.2.tar.gz
 Summary  : A formatter for Python code
